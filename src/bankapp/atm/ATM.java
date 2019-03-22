@@ -175,7 +175,7 @@ public class ATM {
             System.out.println("Enter your pin");
             String pin = scanner.nextLine();
 
-            System.out.println("How much do you want to deposit?");
+            System.out.println("How much do you want to withdraw?");
             double amount = Double.parseDouble(scanner.nextLine());
 
             bank.withdraw(accountNumber, pin, amount);
