@@ -40,7 +40,8 @@ public class ATM {
                         openAccount();
                         break;
                     case "B":
-                        getBalance();
+                        getStatement();
+                        //getBalance();
                         break;
                     case "C":
                         deposit();
@@ -109,6 +110,7 @@ public class ATM {
         }
     }
 
+/*
     private void getBalance() throws BankException {
         try {
 
@@ -121,6 +123,19 @@ public class ATM {
                 System.out.format("Balance: %+.2f%n", balance);
             else
                 System.out.println("An error occurred");
+        } catch (BankException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+*/
+
+    private void getStatement() throws BankException {
+        try {
+            System.out.println("Enter your account Number:");
+            int accountNumber = Integer.parseInt(scanner.nextLine());
+            System.out.println("Enter your PIN");
+            String pin = scanner.nextLine();
+            bank.getTransactions(accountNumber, pin);
         } catch (BankException e) {
             System.out.println(e.getMessage());
         }

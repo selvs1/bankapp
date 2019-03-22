@@ -2,6 +2,7 @@ package bankapp.account;
 
 import bankapp.bank.BankException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Account {
@@ -10,7 +11,7 @@ public abstract class Account {
     //Identification
     protected int nr;
     protected String pin;
-    private List<Transaction> transactions;
+    private List<Transaction> transactions = new ArrayList<Transaction>();
 
 
     public Account(int nr, String pin) {
@@ -32,10 +33,12 @@ public abstract class Account {
     //TODO: deposit und withdrwa noch fertig schreiben
 
     public void deposit(double amount) throws BankException{
-        //geht auch amount > balance
+        //TODO: geht auch amount > balance
         if (amount <= 0)
             throw new BankException("deposit: negativ or null amount");
         balance += amount;
+        transactions.add(new Transaction(amount, balance));
+
     }
 
     public boolean equals(Object object) {
@@ -69,8 +72,8 @@ public abstract class Account {
     public void withdraw(double amount) throws BankException {
         if (amount <= 0)
             throw new BankException("withdraw: negativ or null amount");
-
         balance -= amount;
+        transactions.add(new Transaction(amount, balance));
 
     }
 

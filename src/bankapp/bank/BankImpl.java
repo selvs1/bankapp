@@ -3,6 +3,7 @@ package bankapp.bank;
 import bankapp.account.Account;
 import bankapp.account.PersonalAccount;
 import bankapp.account.SavingsAccount;
+import bankapp.account.Transaction;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -113,9 +114,7 @@ public class BankImpl implements Bank {
     public List<Transaction> getTransactions(int nr, String pin) throws BankException {
         Account account = findAccount(nr);
         account.checkPin(pin);
-
-        return list;
-
+        return account.getTransactions();
     }
 
 }

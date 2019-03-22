@@ -1,5 +1,9 @@
 package bankapp.bank;
 
+import bankapp.account.Transaction;
+
+import java.util.List;
+
 public interface Bank {
 
     int openAccount(AccountType type, String pin, double balance);
@@ -11,5 +15,7 @@ public interface Bank {
     void withdraw(int nr, String pin, double amount)throws BankException;
 
     void closeAccount(int nr, String pin)throws BankException;
+
+    List<Transaction> getTransactions(int nr, String pin) throws BankException;
 
 }

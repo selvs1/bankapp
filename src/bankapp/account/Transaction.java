@@ -1,6 +1,5 @@
 package bankapp.account;
 
-import java.io.PrintStream;
 import java.util.Date;
 
 public class Transaction {
@@ -12,6 +11,8 @@ public class Transaction {
     public Transaction(double amount, double balance) {
         this.amount = amount;
         this.balance = balance;
+        //TODO: Kann das sein?? check
+        valuta = new Date();
     }
 
     public double getAmount() {
@@ -28,7 +29,7 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return String.format("Datum: %10b || Kontostand: %10f || Betrag: %10f", valuta, balance, balance);
+        return String.format("Datum: %10b || Kontostand: %10f || Betrag: %10f", valuta.getTime(), balance, balance);
     }
 
 }
