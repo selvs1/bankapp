@@ -1,10 +1,13 @@
 package bankapp.atm;
 
+import bankapp.account.Account;
+import bankapp.account.Transaction;
 import bankapp.bank.AccountType;
 import bankapp.bank.Bank;
 import bankapp.bank.BankException;
 //import bankapp.bank.BankImpl;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ATM {
@@ -27,7 +30,7 @@ public class ATM {
                 System.out.println("A   A  T   M M M");
                 System.out.println();
                 System.out.println("A  Open Account");
-                System.out.println("B  Get Balance");
+                System.out.println("B  Get Statement");
                 System.out.println("C  Deposit");
                 System.out.println("D  Withdraw");
                 System.out.println("E  Close Account");
@@ -135,7 +138,10 @@ public class ATM {
             int accountNumber = Integer.parseInt(scanner.nextLine());
             System.out.println("Enter your PIN");
             String pin = scanner.nextLine();
-            bank.getTransactions(accountNumber, pin);
+            //System.out.println(bank.getTransactions(accountNumber, pin));
+            for (Transaction log : bank.getTransactions(accountNumber, pin)) {
+                System.out.println(log);
+            }
         } catch (BankException e) {
             System.out.println(e.getMessage());
         }

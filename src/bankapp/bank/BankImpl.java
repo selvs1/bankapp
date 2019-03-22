@@ -60,13 +60,13 @@ public class BankImpl implements Bank {
         List<Account> list = new ArrayList<>(accounts.values()); //TODO: Was macht der Ausdruck in der Klammer? Wie findet man das?
         //accounts.values() --> gibt ein Set zurück, die obige ausdruck, nimmt den Set und wandelt in eien ArrayList um
 
-        AccountComparator taskSort = new AccountComparator();
+        AccountComparator sortForMe = new AccountComparator();
 
 /*
         Fischli
         accounts.sort(new AccountComparator());
 */
-        list.sort(taskSort);
+        list.sort(sortForMe);
 
         return list;
 

@@ -11,7 +11,6 @@ public class Transaction {
     public Transaction(double amount, double balance) {
         this.amount = amount;
         this.balance = balance;
-        //TODO: Kann das sein?? check
         valuta = new Date();
     }
 
@@ -29,7 +28,14 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return String.format("Datum: %10b || Kontostand: %10f || Betrag: %10f", valuta.getTime(), balance, balance);
+        return String.format("LOG:    %1$td.%<tm.%<tY(%<ta) [%<tH:%<tM:%<tS]   <<<<Bewegung:   %2$10.2f>>>>   ##Kontostand:   %3$10.2f##", getValuta(), getAmount(), getBalance());
     }
 
+// Main ist nur ein Test
+    public static void main(String[] args) {
+
+        Transaction test = new Transaction(-100, 900);
+        System.out.println(test.toString());
+        //System.out.println(test.getValuta());
+    }
 }

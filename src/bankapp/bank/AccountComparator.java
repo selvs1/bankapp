@@ -5,7 +5,7 @@ import bankapp.account.Account;
 
 import java.util.Comparator;
 
-public class AccountComparator implements Comparator {
+public class AccountComparator<E> implements Comparator<E> {
 
     public AccountComparator() {
 

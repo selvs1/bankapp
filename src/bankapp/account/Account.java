@@ -30,8 +30,6 @@ public abstract class Account {
     }
 
 
-    //TODO: deposit und withdrwa noch fertig schreiben
-
     public void deposit(double amount) throws BankException{
         //TODO: geht auch amount > balance
         if (amount <= 0)
@@ -73,7 +71,7 @@ public abstract class Account {
         if (amount <= 0)
             throw new BankException("withdraw: negativ or null amount");
         balance -= amount;
-        transactions.add(new Transaction(amount, balance));
+        transactions.add(new Transaction(-1*amount, balance));
 
     }
 
