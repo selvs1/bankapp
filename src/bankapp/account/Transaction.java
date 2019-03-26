@@ -28,7 +28,7 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return String.format("LOG:    %1$td.%<tm.%<tY(%<ta) [%<tH:%<tM:%<tS]   <<<<Bewegung:   %2$10.2f>>>>   ##Kontostand:   %3$10.2f##", getValuta(), getAmount(), getBalance());
+        return String.format("LOG:    %1$td.%<tm.%<tY(%<ta) [%<tH:%<tM:%<tS]   <<<<Bewegung:   %2$10.2f>>>>   ##Kontostand:   %3$10.2f##", valuta, amount, balance);
     }
 
 // Main ist nur ein Test

@@ -11,7 +11,7 @@ public abstract class Account {
     //Identification
     protected int nr;
     protected String pin;
-    private List<Transaction> transactions = new ArrayList<Transaction>();
+    private List<Transaction> transactions = new ArrayList<>();
 
 
     public Account(int nr, String pin) {

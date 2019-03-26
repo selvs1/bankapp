@@ -59,6 +59,7 @@ public class BankImpl implements Bank {
 
         List<Account> list = new ArrayList<>(accounts.values()); //TODO: Was macht der Ausdruck in der Klammer? Wie findet man das?
         //accounts.values() --> gibt ein Set zurück, die obige ausdruck, nimmt den Set und wandelt in eien ArrayList um
+        // Der Klammerausdruckt gibt ein Set zurück
 
         AccountComparator sortForMe = new AccountComparator();
 
