@@ -2,10 +2,11 @@ package bankapp.account;
 
 import bankapp.bank.BankException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Account {
+public abstract class Account implements Serializable {
 
     protected double balance;
     //Identification

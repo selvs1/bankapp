@@ -5,21 +5,17 @@ import bankapp.account.PersonalAccount;
 import bankapp.account.SavingsAccount;
 import bankapp.account.Transaction;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
 public class BankImpl implements Bank {
 
     private int lastAccountNr = 0;
-    // private ArrayList<Account> accounts = new ArrayList<>();
-
     private Map<Integer, Account> accounts = new HashMap();
-
+    private static final String DATA_FILE = ".diniMuetter";
 
     public BankImpl() {
-
+        loadData();
 
     }
 
@@ -29,11 +25,13 @@ public class BankImpl implements Bank {
         Account account = findAccount(nr);
         account.checkPin(pin);
         accounts.remove(nr);
+        saveData();
     }
 
     public void deposit(int nr, double amount) throws BankException {
         Account account = findAccount(nr);
         account.deposit(amount);
+        saveData();
 
 
 /*
@@ -44,10 +42,6 @@ public class BankImpl implements Bank {
     }
 
     private Account findAccount(int nr) throws BankException {
-/*        for (Account account : accounts) {
-            if (account.getNr() == nr)
-                return account;
-        }*/
 
         if (accounts.get(nr) != null)
             return accounts.get(nr);
@@ -57,7 +51,7 @@ public class BankImpl implements Bank {
 
     public List<Account> getAccounts() {
 
-        List<Account> list = new ArrayList<>(accounts.values()); //TODO: Was macht der Ausdruck in der Klammer? Wie findet man das?
+        List<Account> list = new ArrayList<>(accounts.values());
         //accounts.values() --> gibt ein Set zurück, die obige ausdruck, nimmt den Set und wandelt in eien ArrayList um
         // Der Klammerausdruckt gibt ein Set zurück
 
@@ -92,6 +86,7 @@ public class BankImpl implements Bank {
         //accounts.add(new SavingsAccount(lastAccountNr, pin, balance));
         int accountNr = lastAccountNr;
         lastAccountNr++;
+        saveData();
         return accountNr;
 
     }
@@ -100,6 +95,7 @@ public class BankImpl implements Bank {
         Account account = findAccount(nr);
         account.checkPin(pin);
         account.withdraw(amount);
+        saveData();
 
 /*
         if (amount <= 0) return false;
@@ -116,6 +112,46 @@ public class BankImpl implements Bank {
         Account account = findAccount(nr);
         account.checkPin(pin);
         return account.getTransactions();
+    }
+
+
+    private void saveData() {
+        // letzte Kontonummer
+        // Bankkonten mittels Objektserialisierung
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(DATA_FILE))) {
+            out.writeObject(accounts);
+            out.writeInt(lastAccountNr);
+        } catch (IOException e) {
+            System.out.println("saveData: Konnte nicht gesepeichert werden");
+        }
+
+    }
+
+
+    private void loadData() {
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(DATA_FILE))) {
+
+            FileInputStream fileIn = new FileInputStream(DATA_FILE);
+            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+
+            Map<Integer, Account> konten = (HashMap) objectIn.readObject();
+            int letzteAccountNummer = objectIn.readInt();
+
+            //TODO: Test --> nach kann nach der Kontrolle enfernt werden
+            System.out.println("The Object has been read from the file");
+            System.out.println("lastAccountNumber = " + letzteAccountNummer);
+            System.out.println("accounts " + konten);
+
+            accounts = konten;
+            lastAccountNr = letzteAccountNummer;
+
+
+        } catch (IOException e) {
+            System.out.println("loadData: konnte nicht geladen werden");
+        } catch (ClassNotFoundException e) {
+            System.out.println("sheiss exception");
+        }
+
     }
 
 }
