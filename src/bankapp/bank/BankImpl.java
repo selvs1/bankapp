@@ -12,7 +12,7 @@ public class BankImpl implements Bank {
 
     private int lastAccountNr = 0;
     private Map<Integer, Account> accounts = new HashMap();
-    private static final String DATA_FILE = ".diniMuetter";
+    private static final String DATA_FILE = ".bankDB";
 
     public BankImpl() {
         loadData();
@@ -134,16 +134,20 @@ public class BankImpl implements Bank {
             FileInputStream fileIn = new FileInputStream(DATA_FILE);
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
 
-            Map<Integer, Account> konten = (HashMap) objectIn.readObject();
-            int letzteAccountNummer = objectIn.readInt();
+            //Map<Integer, Account> konten = (HashMap) objectIn.readObject();
+            //int letzteAccountNummer = objectIn.readInt();
+
+            accounts = (Map<Integer, Account>) objectIn.readObject();
+            lastAccountNr = objectIn.readInt();
 
             //TODO: Test --> nach kann nach der Kontrolle enfernt werden
             System.out.println("The Object has been read from the file");
-            System.out.println("lastAccountNumber = " + letzteAccountNummer);
-            System.out.println("accounts " + konten);
+            System.out.println("lastAccountNumber = " + lastAccountNr);
+            System.out.println("accounts " + accounts);
 
-            accounts = konten;
-            lastAccountNr = letzteAccountNummer;
+            //accounts = konten;
+            //lastAccountNr = letzteAccountNummer;
+
 
 
         } catch (IOException e) {
