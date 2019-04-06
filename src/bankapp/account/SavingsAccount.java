@@ -5,6 +5,7 @@ import bankapp.bank.BankException;
 public class SavingsAccount extends Account {
 
     public static final double WITHDRAW_LIMIT = 1000;
+    private static double INTEREST_RATE = 0.05;
 
 
     public SavingsAccount(int nr, String pin, double balance) {
@@ -30,4 +31,10 @@ public class SavingsAccount extends Account {
 
 
     }
+
+    @Override
+    public double getInterestRate() {
+        return INTEREST_RATE;
+    }
+
 }

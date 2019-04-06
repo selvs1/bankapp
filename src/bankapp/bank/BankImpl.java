@@ -8,7 +8,7 @@ import bankapp.account.Transaction;
 import java.io.*;
 import java.util.*;
 
-public class BankImpl implements Bank {
+public class BankImpl extends Thread implements Bank {
 
     private int lastAccountNr = 0;
     private Map<Integer, Account> accounts = new HashMap();
@@ -16,6 +16,7 @@ public class BankImpl implements Bank {
 
     public BankImpl() {
         loadData();
+        //todo: start here thread start(); --> der thread ruft dann run() auf
 
     }
 
@@ -157,5 +158,19 @@ public class BankImpl implements Bank {
         }
 
     }
+
+    public void run() {
+        while (!Thread.interrupted()) {
+            Thread.sleep(INterstse_period);
+            for (Account account : accounts.values()) {
+                account.payInterest();
+
+            }
+            saveData();
+            catch(interruptedException ex)
+        }break
+
+    }
+
 
 }

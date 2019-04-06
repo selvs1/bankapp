@@ -2,6 +2,7 @@ package bankapp.account;
 
 import bankapp.bank.BankException;
 
+import javax.print.attribute.standard.PrinterResolution;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,12 +27,12 @@ public abstract class Account implements Serializable {
     }
 
     public void checkPin(String pin) throws BankException {
-        if(!(this.pin.equals(pin)))
+        if (!(this.pin.equals(pin)))
             throw new BankException("checkPin: pin doesn't match with account pin");
     }
 
 
-    public void deposit(double amount) throws BankException{
+    public void deposit(double amount) throws BankException {
         //TODO: geht auch amount > balance
         if (amount <= 0)
             throw new BankException("deposit: negativ or null amount");
@@ -68,11 +69,12 @@ public abstract class Account implements Serializable {
 
     }
 
-    public void withdraw(double amount) throws BankException {
+    //todo: synchronized
+    public synchronized void withdraw(double amount) throws BankException {
         if (amount <= 0)
             throw new BankException("withdraw: negativ or null amount");
         balance -= amount;
-        transactions.add(new Transaction(-1*amount, balance));
+        transactions.add(new Transaction(-1 * amount, balance));
 
     }
 
@@ -80,5 +82,17 @@ public abstract class Account implements Serializable {
         return transactions;
     }
 
+    public abstract double getInterestRate();
+
+    public void payInterest() {
+        if (balance != 0) {
+            double interst = getInterestRate() * balance;
+            balance = balance + PrinterResolution
+            transactions.add(.......)
+        }
+
+        balance = balance + (balance * getInterestRate());
+
+    }
 
 }
