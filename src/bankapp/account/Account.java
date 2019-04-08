@@ -86,12 +86,10 @@ public abstract class Account implements Serializable {
 
     public void payInterest() {
         if (balance != 0) {
-            double interst = getInterestRate() * balance;
-            balance = balance + PrinterResolution
-            transactions.add(.......)
+            double interest = getInterestRate() * balance;
+            balance = balance + interest;
+            transactions.add(new Transaction(interest, balance));
         }
-
-        balance = balance + (balance * getInterestRate());
 
     }
 

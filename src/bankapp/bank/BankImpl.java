@@ -13,9 +13,11 @@ public class BankImpl extends Thread implements Bank {
     private int lastAccountNr = 0;
     private Map<Integer, Account> accounts = new HashMap();
     private static final String DATA_FILE = ".bankDB";
+    private static long INTEREST_PERIOD = 100000L;
 
     public BankImpl() {
         loadData();
+        Thread interestUpdater = new Thread();
         //todo: start here thread start(); --> der thread ruft dann run() auf
 
     }
@@ -150,7 +152,6 @@ public class BankImpl extends Thread implements Bank {
             //lastAccountNr = letzteAccountNummer;
 
 
-
         } catch (IOException e) {
             System.out.println("loadData: konnte nicht geladen werden");
         } catch (ClassNotFoundException e) {
@@ -168,7 +169,7 @@ public class BankImpl extends Thread implements Bank {
             }
             saveData();
             catch(interruptedException ex)
-        }break
+        } break
 
     }
 

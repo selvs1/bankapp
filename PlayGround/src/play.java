@@ -1,3 +1,5 @@
+import java.util.Map;
+
 public class play {
 
     public static void main(String[] args) {
@@ -24,6 +26,7 @@ public class play {
             System.out.println("9");
         }
         System.out.println("10");
+
 
         //System.out.println(10/0);
     }
