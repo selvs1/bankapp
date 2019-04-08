@@ -66,7 +66,6 @@ public abstract class Account implements Serializable {
 
     public String toString() {
         return getClass().getSimpleName() + " {nr=" + nr + ", balance=" + balance + "}";
-
     }
 
     //todo: synchronized

@@ -13,11 +13,12 @@ public class BankImpl extends Thread implements Bank {
     private int lastAccountNr = 0;
     private Map<Integer, Account> accounts = new HashMap();
     private static final String DATA_FILE = ".bankDB";
-    private static long INTEREST_PERIOD = 100000L;
+    private static long INTEREST_PERIOD = 10000L; //100000L;
 
     public BankImpl() {
         loadData();
-        Thread interestUpdater = new Thread();
+        //Thread interestUpdater = new Thread();
+        start();
         //todo: start here thread start(); --> der thread ruft dann run() auf
 
     }
@@ -162,14 +163,16 @@ public class BankImpl extends Thread implements Bank {
 
     public void run() {
         while (!Thread.interrupted()) {
-            Thread.sleep(INterstse_period);
-            for (Account account : accounts.values()) {
-                account.payInterest();
-
+            try {
+                Thread.sleep(INTEREST_PERIOD);
+                for (Account account : accounts.values())
+                    account.payInterest();
+            } catch (InterruptedException e) {
+                System.out.println("Thread: Keine Ahnung was für ein Problem");
+                break;
             }
             saveData();
-            catch(interruptedException ex)
-        } break
+        }
 
     }
 
