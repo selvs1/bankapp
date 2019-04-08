@@ -101,14 +101,6 @@ public class BankImpl extends Thread implements Bank {
         account.withdraw(amount);
         saveData();
 
-/*
-        if (amount <= 0) return false;
-        if (account == null) return false;
-        if (account.checkPin(pin))
-            return account.withdraw(amount);
-        return false;
-*/
-
     }
 
 
@@ -120,8 +112,6 @@ public class BankImpl extends Thread implements Bank {
 
 
     private void saveData() {
-        // letzte Kontonummer
-        // Bankkonten mittels Objektserialisierung
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(DATA_FILE))) {
             out.writeObject(accounts);
             out.writeInt(lastAccountNr);
@@ -135,22 +125,18 @@ public class BankImpl extends Thread implements Bank {
     private void loadData() {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(DATA_FILE))) {
 
+/*
+            Andere Schreibweise
             FileInputStream fileIn = new FileInputStream(DATA_FILE);
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
-
-            //Map<Integer, Account> konten = (HashMap) objectIn.readObject();
-            //int letzteAccountNummer = objectIn.readInt();
-
-            accounts = (Map<Integer, Account>) objectIn.readObject();
-            lastAccountNr = objectIn.readInt();
+*/
+            accounts = (Map<Integer, Account>) in.readObject();
+            lastAccountNr = in.readInt();
 
             //TODO: Test --> nach kann nach der Kontrolle enfernt werden
             System.out.println("The Object has been read from the file");
             System.out.println("lastAccountNumber = " + lastAccountNr);
             System.out.println("accounts " + accounts);
-
-            //accounts = konten;
-            //lastAccountNr = letzteAccountNummer;
 
 
         } catch (IOException e) {
